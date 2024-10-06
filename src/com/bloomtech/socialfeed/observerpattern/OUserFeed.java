@@ -7,13 +7,14 @@ import com.bloomtech.socialfeed.models.User;
 import java.util.List;
 
 //TODO: Implement Observer Pattern
-public class OUserFeed {
+public class OUserFeed implements Observer {
     private User user;
     private List<Post> feed;
 
     public OUserFeed(User user) {
         this.user = user;
         //TODO: update OUserFeed in constructor after implementing observer pattern
+        feed=user.getUserFeed().getFeed();
     }
 
     public User getUser() {
@@ -22,5 +23,10 @@ public class OUserFeed {
 
     public List<Post> getFeed() {
         return feed;
+    }
+
+    @Override
+    public void update() {
+        feed=user.getUserFeed().getFeed();
     }
 }
