@@ -14,7 +14,6 @@ public class OUserFeed implements Observer {
     public OUserFeed(User user) {
         this.user = user;
         //TODO: update OUserFeed in constructor after implementing observer pattern
-        feed=user.getUserFeed().getFeed();
     }
 
     public User getUser() {
@@ -27,6 +26,6 @@ public class OUserFeed implements Observer {
 
     @Override
     public void update() {
-        feed=user.getUserFeed().getFeed();
+        feed = user.getUserFeed().getFeed();
     }
 }
