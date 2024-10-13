@@ -25,7 +25,7 @@ public class SourceFeed implements Source {
 
     public Post addPost(User user, String body) {
         Post post = new Post(user.getUsername(),
-                LocalDateTime.now().toString(),
+                LocalDateTime.now(),
                 body);
         posts = postRepository.addPost(post);
 

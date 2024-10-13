@@ -29,9 +29,8 @@ public class MT04_LocalDateTime {
     public void assertThat_newPostsHaveCurrentDate() throws NoSuchFieldException {
         SourceFeed sourceFeed = new SourceFeed();
         User user = new User();
-            user.setUsername("Testuser");
+        user.setUsername("Testuser");
         Post post = sourceFeed.addPost(user, "test post");
-        fail("ACTION REQUIRED: When you've updated the `postedon` field to the correct data type, go into " + new Throwable().getStackTrace()[0].getFileName() + "'s " + new Throwable().getStackTrace()[0].getMethodName() + " method to uncomment the assertEquals line and remove this line"); //Uncomment line below and ensure it passes before submitting to CodeGrade
-//        assertEquals(LocalDateTime.now().getDayOfYear(), post.getPostedon().getDayOfYear());
+        assertEquals(LocalDateTime.now().getDayOfYear(), post.getPostedon().getDayOfYear());
     }
 }
