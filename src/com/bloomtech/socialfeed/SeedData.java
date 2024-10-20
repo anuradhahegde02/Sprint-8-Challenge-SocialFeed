@@ -3,6 +3,7 @@ package com.bloomtech.socialfeed;
 import com.bloomtech.socialfeed.models.Role;
 import com.bloomtech.socialfeed.models.User;
 import com.bloomtech.socialfeed.repositories.UserRepository;
+import com.bloomtech.socialfeed.App;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,25 +27,27 @@ public class SeedData {
         }
 
         User leader = new User();
-            leader.setUsername("Leader");
-            leader.setEmail("leader@email.com");
-            leader.setPassword("TestPass123");
-            leader.setRole(Role.ADMIN);
+        leader.setUsername("Leader");
+        leader.setEmail("leader@email.com");
+        leader.setPassword("TestPass123");
+        leader.setRole(Role.ADMIN);
+
 
         User follower = new User();
-            follower.setUsername("Follower");
-            follower.setEmail("follower@email.com");
-            follower.setPassword("TestPass123");
-            follower.setRole(Role.USER);
+        follower.setUsername("Follower");
+        follower.setEmail("follower@email.com");
+        follower.setPassword("TestPass123");
+        follower.setRole(Role.USER);
+
 
         User loner = new User();
-            loner.setUsername("Loner");
-            loner.setEmail("loner@email.com");
-            loner.setPassword("TestPass123");
-            loner.setRole(Role.DATA);
+        loner.setUsername("Loner");
+        loner.setEmail("loner@email.com");
+        loner.setPassword("TestPass123");
+        loner.setRole(Role.DATA);
+
 
         leader.follow(follower.getUsername());
-
         follower.follow(leader.getUsername());
         follower.follow(loner.getUsername());
 
@@ -52,6 +55,7 @@ public class SeedData {
         userList.add(leader);
         userList.add(follower);
         userList.add(loner);
+
 
         userRepository.save(leader);
         userRepository.save(follower);

@@ -19,6 +19,10 @@ public class User {
     public User() {
         following = new ArrayList<>();
         userFeed = new OUserFeed(this);
+        if (!(App.sourceFeed.getObservers().contains(this.username))) {
+            App.sourceFeed.attach(userFeed);
+        }
+
     }
 
     public String getUsername() {
@@ -38,7 +42,7 @@ public class User {
     }
 
     public OUserFeed getUserFeed() {
-        return userFeed;
+        return this.userFeed;
     }
 
     public void setUsername(String username) {
@@ -81,5 +85,7 @@ public class User {
 
     public void follow(String usernameToFollow) {
         following.add(usernameToFollow);
+
+
     }
 }

@@ -13,10 +13,12 @@ public class SourceFeed implements Source {
     private final PostRepository postRepository = new PostRepository();
 
     private List<Post> posts;
-    private List<Observer> observers;
+    private List<Observer> oUserFeed;
+    private String tempUserName = null;
 
     public SourceFeed() {
         this.posts = new ArrayList<>();
+        this.oUserFeed = new ArrayList<>();
     }
 
     public void getAllPosts() {
@@ -28,12 +30,14 @@ public class SourceFeed implements Source {
                 LocalDateTime.now(),
                 body);
         posts = postRepository.addPost(post);
+        tempUserName = user.getUsername();
+        updateAll();
 
         return post;
     }
 
     public List<Observer> getObservers() {
-        return observers;
+        return oUserFeed;
     }
 
     public List<Post> getPosts() {
@@ -42,19 +46,27 @@ public class SourceFeed implements Source {
 
     @Override
     public void attach(Observer observer) {
-        observers.add(observer);
+        oUserFeed.add((OUserFeed) observer);
+
     }
 
     @Override
     public void detach(Observer observer) {
-        observers.remove(observer);
+        oUserFeed.remove(observer);
 
     }
 
     @Override
     public void updateAll() {
-        for (Observer o : observers) {
-            o.update();
+        for (Observer o : oUserFeed) {
+            if (o instanceof OUserFeed && tempUserName != null) {
+                List<String> tempFollowers = ((OUserFeed) o).getUser().getFollowing();
+                if (tempFollowers.contains(tempUserName)) {
+                    o.update();
+                }
+            }
+
+
         }
     }
 }

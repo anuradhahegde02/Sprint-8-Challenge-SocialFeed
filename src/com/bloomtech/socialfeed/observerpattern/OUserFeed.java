@@ -4,6 +4,7 @@ import com.bloomtech.socialfeed.App;
 import com.bloomtech.socialfeed.models.Post;
 import com.bloomtech.socialfeed.models.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //TODO: Implement Observer Pattern
@@ -14,6 +15,7 @@ public class OUserFeed implements Observer {
     public OUserFeed(User user) {
         this.user = user;
         //TODO: update OUserFeed in constructor after implementing observer pattern
+        feed = new ArrayList<>();
     }
 
     public User getUser() {
@@ -26,6 +28,16 @@ public class OUserFeed implements Observer {
 
     @Override
     public void update() {
-        feed = user.getUserFeed().getFeed();
+        List<String> followingList = user.getFollowing();
+        List<Post> posts = App.sourceFeed.getPosts();
+        this.feed.clear();
+        for (Post p : posts) {
+            if (followingList.contains(p.getUsername())) {
+                feed.add(p);
+            }
+
+        }
+
+
     }
 }
